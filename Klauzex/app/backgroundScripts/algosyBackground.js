@@ -393,9 +393,8 @@ function initAlgosy(clauses, onReady) {
                     }
                 }
             }
-            return accumulator;
+            sendResponse(accumulator);
         }
-        sendResponse({ clauses: processedClauses });
         if (request.request == "changeHtml")
             sendResponse({ html: generateText(processedClauses) });
     });

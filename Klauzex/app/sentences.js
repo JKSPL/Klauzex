@@ -18,18 +18,22 @@ var abbvs = [
     'zob',
     'art',
     'ust',
+    'poz',
+    'tel'
 ];
 
 function sanitizeText(inputString)
 {
-    inputString = inputString.replace(new RegExp('\\n', 'g'), ' ');
+    inputString = inputString.replace(new RegExp('\\n', 'g'), '. ');
     inputString = inputString.replace(new RegExp('\\s', 'g'), ' ');
+
     for (i = 0; i < abbvs.length; i++) {
+        escapedAbbv = abbvs[i].replace(/\./g, '$');
+        inputString = inputString.replace(new RegExp(escapeRegExp(abbvs[i]), 'gi'), escapedAbbv);
+
         prefixes = [' ', '('];
-        sufixes = ['. ', '.,', '.:', '.;' ];
         for (j = 0; j < prefixes.length; j++)
-            for (k = 0; k < sufixes.length; k++)
-                inputString = inputString.replace(new RegExp(escapeRegExp(prefixes[j] + abbvs[i] + sufixes[k]), 'gi'), ' ');
+            inputString = inputString.replace(new RegExp('('+escapeRegExp(prefixes[j] + abbvs[i])+')\\.', 'gi'), '$1\$');
     }
 
     return inputString;
@@ -40,7 +44,10 @@ function sanitizeAndSplitSentences(inputString)
     sanitizedText = sanitizeText(inputString);
     tab = sanitizedText.split('. ');
     for (i = 0; i < tab.length; i++)
+    {
         tab[i] = tab[i].trim();
+        tab[i] = tab[i].replace(/\$/g, '.');
+    }
     tab = tab.filter(function (s) { return s.length > 20 });
     return tab;
 }

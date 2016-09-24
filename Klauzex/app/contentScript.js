@@ -1,5 +1,5 @@
-﻿//findScams()
-console.log(sanitizeAndSplitSentences(document.body.innerText));
+﻿findScams()
+//console.log(sanitizeAndSplitSentences(document.body.innerText));
 
 function findScams()
 {

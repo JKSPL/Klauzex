@@ -19,7 +19,8 @@ var abbvs = [
     'art',
     'ust',
     'poz',
-    'tel'
+    'tel',
+    'ang'
 ];
 
 function sanitizeText(inputString)

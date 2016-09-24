@@ -1,8 +1,6 @@
-﻿chrome.storage.local.get('dictionary', function (dictionary) {
-    dictionary = dictionary.dictionary;
-    inputContent = document.all[0].innerText;
-    findLinksWithPolicies();
-});
+﻿//inputContent = document.all[0].innerText;
+//console.log(getScams(inputContent));
+//findLinksWithPolicies();
 
 function findLinksWithPolicies()
 {

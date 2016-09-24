@@ -382,10 +382,10 @@ function initAlgosy(clauses, onReady) {
             for (var i = 0; i < gotClauses.length; i++) {
                 var result = sanitizeSingle(gotClauses[i]);
                 console.log("KOMPRESJA");
-                console.log("Z: " + gotClauses[i]);
-                console.log("DO: " + result);
+                console.log("Z: '" + gotClauses[i] + "'");
+                console.log("DO: '" + result + "'");
                 for (var j = 0; j < processedClauses.length; j++) {
-                    if(processedClauses[j] == result){
+                    if(processedClauses[j].clause == result){
                         accumulator.push({
                             text: gotClauses[i],
                             clause: processedClauses[j].id

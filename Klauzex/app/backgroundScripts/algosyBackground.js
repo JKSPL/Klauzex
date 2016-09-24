@@ -16,7 +16,6 @@ function trimToChar(str, char1, char2) {
     var suffixTrim = 0;
     while (prefixTrim != str.length && str[prefixTrim] != char1) {
         prefixTrim++;
-        console.log(prefixTrim);
     }
     while (suffixTrim != str.length && str[str.length - suffixTrim - 1] != char2) {
         suffixTrim++;

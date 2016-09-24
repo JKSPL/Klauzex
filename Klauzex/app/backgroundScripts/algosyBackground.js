@@ -1,5 +1,6 @@
 ﻿var processedClauses;
 var trashExact = [
+    "…",
     "sp. z o.o.",
     "z o.o.",
     "sp.j.",
@@ -8,6 +9,8 @@ var trashExact = [
     "itp.",
     "itp",
     "itd.",
+    "np.",
+    "tj.",
     "itd",
     "®",
     "w/w",
@@ -16,6 +19,7 @@ var trashExact = [
     "ew.",
     "tzn.",
     ",",
+    ":",
     "...",
     "sobie",
     "także",
@@ -118,11 +122,11 @@ var rozponawanieRegexow = [
     {
         tag: "codeofconduct",
         regex: [
-            "(\\bregulam[\\w]+)",
-            "(\\bzapis[\\w]+)",
-            "(\\bprzywilej[\\w]+)",
-            "(\\bprzepis[\\w]+)",
-            "(\\bzasad[\\w]+)",
+            containsPrefix("regulam"),
+            containsPrefix("zapis"),
+            containsPrefix("przywilej"),
+            containsPrefix("przepis"),
+            containsPrefix("zasad"),
         ]
     },
     {
@@ -143,6 +147,9 @@ var rozponawanieRegexow = [
             containsPrefix("zegar"),
             containsPrefix("dostaw"),
             containsPrefix("zamów"),
+            containsPrefix("opakowan"),
+            containsPrefix("wyrob"),
+            containsPrefix("wyrób"),
             containsPrefix("zakup"),
             containsPrefix("transakc"),
             "(\\b" + escapeRegExp("sprzeda") + "[\\S]+)",
@@ -162,7 +169,7 @@ var rozponawanieRegexow = [
         ]
     },
     {
-        tag: "judgeDecide",
+        tag: "judgedecide",
         regex: [
             "(\\b" + escapeRegExp("rozstrzyg") + "[\\S]*)",
             "(\\b" + escapeRegExp("rozpatryw") + "[\\S]*)",
@@ -170,7 +177,7 @@ var rozponawanieRegexow = [
         ]
     },
     {
-        tag: "changeAllowance",
+        tag: "changeallowance",
         regex: [
             "(\\b" + escapeRegExp("zastrzega praw") + "[\\S]*)",
             "(\\b" + escapeRegExp("zastrzegają praw") + "[\\S]*)",
@@ -237,7 +244,7 @@ var rozponawanieRegexow = [
         ]
     },
     {
-        tag: "isValidSince",
+        tag: "isvalidsince",
         regex: [
             containsPrefix("wchodzi w życie od"),
             containsPrefix("będą ważne od"),
@@ -297,7 +304,6 @@ function trimToApostrophes(str) {
 function sanitizeSingle(clause) {
     clause = clause.replace(new RegExp("(\\((.*?)\\))", "ig"), "");
     clause = clause.replace(new RegExp("(\\[(.*?)\\])", "ig"), "");
-    clause = trimToApostrophes(clause);
     for (var i = 0; i < trashExact.length; i++) {
         clause = replaceAll(clause, trashExact[i], "");
     }
@@ -312,11 +318,22 @@ function sanitizeSingle(clause) {
         danyTag = rozponawanieRegexow[j];
         var replacement = "#" + danyTag.tag + "#";
         for (var i = 0; i < danyTag.regex.length; i++) {
-            var temp = clause.match(new RegExp(danyTag.regex[i], "gi")) || [];
+            //var temp = clause.match(new RegExp(danyTag.regex[i], "gi")) || [];
             clause = clause.replace(new RegExp(danyTag.regex[i], "gi"), replacement);
         }
     }
+    var replacement = "#company#";
+    clause = clause.replace(new RegExp("\\b([\\S]*[A-Z]+[\\S]*)", "g"), replacement);
     clause = replaceDoubleSpaces(clause);
+    if (clause[clause.length - 1] == ' ') {
+        clause = clause.substring(0, clause.length - 1);
+    }
+    if (clause[clause.length - 1] == '.') {
+        clause = clause.substring(0, clause.length - 1);
+    }
+    if (clause[0] == ' ') {
+        clause = clause.substring(1, clause.length - 1);
+    }
     return clause;
 }
 
@@ -340,10 +357,13 @@ function sanitize(clauses) {
         return clause.branch && clause.branch.indexOf("ELEKTRONICZNY") != -1 && goodBrackets(clause.clause) && notUseless(clause.clause);
     });
     for (var i = 0; i < clauses.length; i++) {
+        clauses[i].clause = clauses[i].clause.replace(new RegExp("(\\((.*?)\\))", "ig"), "");
+        clauses[i].clause = clauses[i].clause.replace(new RegExp("(\\[(.*?)\\])", "ig"), "");
+        clauses[i].clause = trimToApostrophes(clauses[i].clause);
         clauses[i].clause = sanitizeSingle(clauses[i].clause);
     }
     clauses = clauses.filter(function (clause) {
-        return clause.clause.length > 20;
+        return clause.clause.length > 20 && clause.clause.indexOf('.') == -1;
     });
     return clauses;
 }
@@ -355,16 +375,28 @@ function initAlgosy(clauses, onReady) {
 
     chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-      if (request.request == "clauses")
-          sendResponse({ clauses: processedClauses });
-    });
-
-    chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+        if (request.request == "clauses") {
+            var accumulator = [];
+            var gotClauses = request.input;
+            for (var i = 0; i < gotClauses.length; i++) {
+                var result = sanitize(gotClauses[i]);
+                console.log(result);
+                for (var j = 0; j < processedClauses.length; j++) {
+                    if(processedClauses[i] == result){
+                        accumulator.push({
+                            text: gotClauses[i],
+                            clause: processedClauses[i].id
+                        });
+                        break;
+                    }
+                }
+            }
+            return accumulator;
+        }
+        sendResponse({ clauses: processedClauses });
         if (request.request == "changeHtml")
             sendResponse({ html: generateText(processedClauses) });
     });
-
     if (onReady) {
         onReady();
     }

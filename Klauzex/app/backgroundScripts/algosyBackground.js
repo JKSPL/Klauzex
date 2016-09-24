@@ -385,10 +385,10 @@ function initAlgosy(clauses, onReady) {
                 console.log("Z: " + gotClauses[i]);
                 console.log("DO: " + result);
                 for (var j = 0; j < processedClauses.length; j++) {
-                    if(processedClauses[i] == result){
+                    if(processedClauses[j] == result){
                         accumulator.push({
                             text: gotClauses[i],
-                            clause: processedClauses[i].id
+                            clause: processedClauses[j].id
                         });
                         break;
                     }

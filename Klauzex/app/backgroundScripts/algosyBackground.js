@@ -18,6 +18,8 @@ var trashExact = [
     "tzn.",
     ",",
     "...",
+    "sobie",
+    "także",
 
 ];//wywala insensitive
 function escapeRegExp(str) {
@@ -34,6 +36,8 @@ var useless = [
 ]
 
 var trashPrefix = [
+    "powyższ",
+    "poniższ",
     "ewent",
     "mail",
     "każd",
@@ -41,18 +45,26 @@ var trashPrefix = [
     "żaden",
     "treśc",
     "właściw",
+    "jakiekolw",
     "niniej",
     "wszelk",
     "wszystk",
     "wyżej wymien",
+    "mechan",
     "postanowie",
-    "jedyn",
+    "jednak",
     "dokonywan",
     "wprowadzen",
+    "drobn",
+    "rzeczywist",
 ]
 
 var trashSuffix = [
 ];
+
+function containsPrefix(string) {
+    return "\\b(" + escapeRegExp(string) + "[\\S]*)";
+}
 
 var rozponawanieRegexow = [
     {
@@ -74,7 +86,11 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("kurier") + "[\\S]*)",
             "(\\b" + escapeRegExp("spół") + "[\\S]*)",
             "(\\b" + escapeRegExp("pozwan") + "[\\S]*)",
+            "(\\b" + escapeRegExp("perfumer") + "[\\S]*)",
             "(\\b" + escapeRegExp("producent") + "[\\S]*)",
+            "(\\b" + escapeRegExp("podmiot") + "[\\S]*)",
+            "(\\b" + escapeRegExp("wydawc") + "[\\S]*)",
+            "(\\b" + escapeRegExp("dostawc") + "[\\S]*)",
             "(\\\"(.*?)\\\")",
         ]
     },
@@ -95,27 +111,42 @@ var rozponawanieRegexow = [
     {
         tag: "codeofconduct",
         regex: [
-            "(regulam[\\w]+)",
-            "(przywilej[\\w]+)",
+            "(\\bregulam[\\w]+)",
+            "(\\bzapis[\\w]+)",
+            "(\\bprzywilej[\\w]+)",
+            "(\\bprzepis[\\w]+)",
         ]
     },
     {
         tag: "commodity",
         regex: [
-            "(\\b" + escapeRegExp("towar") + "[\\S]*)",
+            containsPrefix("korzystanie z"),
+            "(\\b" + escapeRegExp("dostarcz") + "[\\S]*)",
+            containsPrefix("towar"),
             "(\\b" + escapeRegExp("produk") + "[\\S]+)",
-            "(\\b" + escapeRegExp("usług") + "[\\S]+)",
+            containsPrefix("usług"),
             "(\\b" + escapeRegExp("przesył") + "[\\S]+)",
             "(\\b" + escapeRegExp("umow") + "[\\S]+)",
-            "(\\b" + escapeRegExp("kupno") + "[\\S]+)",
-            "(\\b" + escapeRegExp("kupna") + "[\\S]+)",
+            containsPrefix("kredyt"),
+            containsPrefix("kupno"),
+            containsPrefix("kupna"),
+            containsPrefix("umów"),
+            containsPrefix("zegar"),
+            containsPrefix("dostaw"),
+            containsPrefix("zamów"),
+            containsPrefix("zakup"),
             "(\\b" + escapeRegExp("sprzeda") + "[\\S]+)",
+            "(\\b" + escapeRegExp("używ") + "[\\S]+)",
+            "(\\b" + escapeRegExp("otrzym") + "[\\S]+)",
+            "(\\b" + escapeRegExp("ofer") + "[\\S]+)",
         ]
     },
     {
         tag: "judge",
         regex: [
             "(\\b" + escapeRegExp("sąd") + "[\\S]*)",
+            "(\\b" + escapeRegExp("powszech") + "[\\S]*)",
+            "(\\b" + escapeRegExp("rejon") + "[\\S]*)",
             "(\\b" + escapeRegExp("sęd") + "[\\S]*)",
         ]
     },
@@ -124,20 +155,70 @@ var rozponawanieRegexow = [
         regex: [
             "(\\b" + escapeRegExp("rozstrzyg") + "[\\S]*)",
             "(\\b" + escapeRegExp("rozpatryw") + "[\\S]*)",
+            "(\\b" + escapeRegExp("rozpozn") + "[\\S]*)",
         ]
     },
     {
         tag: "changeAllowance",
         regex: [
-            "(\\b" + escapeRegExp("prawo do zm") + "[\\S]*)",
+            "(\\b" + escapeRegExp("zastrzega praw") + "[\\S]*)",
+            "(\\b" + escapeRegExp("zastrzegają praw") + "[\\S]*)",
+            "(\\b" + escapeRegExp("zastrzega moż") + "[\\S]*)",
+            "(\\b" + escapeRegExp("zastrzegają moż") + "[\\S]*)",
+            "(\\b" + escapeRegExp("zastrzegamy praw") + "[\\S]*)",
+            "(\\b" + escapeRegExp("ma prawo do zmian") + "[\\S]*)",
+            "(\\b" + escapeRegExp("prawo do zmian") + "[\\S]*)",
+            "(\\b" + escapeRegExp("prawo do zmian") + "[\\S]*)",
+            "(\\b" + escapeRegExp("może zostać zmieniony") + "[\\S]*)",
+            "(\\b" + escapeRegExp("jest uprawniony") + "[\\S]*)",
+        ]
+    },
+    {
+        tag: "notResponsible",
+        regex: [
+            containsPrefix("nie ponosi odp"),
+            containsPrefix("nie ponosimy odp"),
+            containsPrefix("nie odpowiad"),
+            containsPrefix("nie jest odpow"),
         ]
     },
     {
         tag: "complaint",
         regex: [
-            "(" + escapeRegExp("reklamac") + "[\\S]+)",
-            "(" + escapeRegExp("spor") + "[\\S]+)",
-            "(" + escapeRegExp("spór") + "[\\S]+)",
+            containsPrefix("kwesti"),
+            containsPrefix("sprawa"),
+            containsPrefix("zwrot"),
+            containsPrefix("reklam"),
+            containsPrefix("spor"),
+            containsPrefix("spór"),
+            containsPrefix("zwrac"),
+            containsPrefix("zwrot"),
+            containsPrefix("roszcz"),
+        ]
+    },
+    {
+        tag: "error",
+        regex: [
+            containsPrefix("błęd"),
+            containsPrefix("uszkodz"),
+            containsPrefix("szkod"),
+            containsPrefix("uchyb"),
+            containsPrefix("zniszcz"),
+            containsPrefix("błąd"),
+            containsPrefix("wad"),
+            containsPrefix("usterk"),
+            containsPrefix("zaginię"),
+            containsPrefix("nieprawid"),
+            containsPrefix("opóźni"),
+        ]
+    },
+    {
+        tag: "isValidSince",
+        regex: [
+            containsPrefix("wchodzi w życie od"),
+            containsPrefix("obowiązuje od"),
+            containsPrefix("obowiązują od"),
+            containsPrefix("wchodzą w życie od"),
         ]
     }
 ];
@@ -189,6 +270,7 @@ function sanitizeSingle(clause) {
     for (var i = 0; i < trashExact.length; i++) {
         clause = replaceAll(clause, trashExact[i], "");
     }
+    clause = replaceDoubleSpaces(clause);
     for (var i = 0; i < trashPrefix.length; i++) {
         clause = clause.replace(new RegExp("(" + escapeRegExp(trashPrefix[i]) + "[\\S]*)", "ig"), "")
     }
@@ -197,15 +279,10 @@ function sanitizeSingle(clause) {
     }
     for(var j = 0; j < rozponawanieRegexow.length; j++){
         danyTag = rozponawanieRegexow[j];
-        console.log(danyTag);
         var replacement = "#" + danyTag.tag + "#";
         for (var i = 0; i < danyTag.regex.length; i++) {
             var temp = clause.match(new RegExp(danyTag.regex[i], "gi")) || [];
             clause = clause.replace(new RegExp(danyTag.regex[i], "gi"), replacement);
-            if (temp.length) {
-                console.log(clause);
-                console.log(temp);
-            }
         }
     }
     clause = replaceDoubleSpaces(clause);

@@ -1,9 +1,9 @@
-﻿findScams()
-//console.log(sanitizeAndSplitSentences(document.body.innerText));
+﻿findScams();
 
 function findScams()
 {
     var inputContent = sanitizeAndSplitSentences(document.body.innerText);
+    console.log(inputContent);
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
         uiArray = [];
@@ -14,7 +14,10 @@ function findScams()
                 clause: scams[i].text
             })
         }
-        if (scams.length == 0) findScamsInLinks();
+        if (scams.length == 0)
+        {
+            findScamsInLinks();
+        }
         else {
             KlauzulexUI.showWarning(uiArray);
         }
@@ -24,14 +27,26 @@ function findScams()
 function findScamsInLinks() {
     policiesLinks = findLinksWithPolicies();
     console.log('Found ' + policiesLinks.length + ' links');
-    for (i = 0; i < policiesLinks.length; i++) {
+    linksSet = {};
+    for (i = 0; i < policiesLinks.length; i++)
+    {
+        linksSet[policiesLinks[i].href] = true;
+    }
+    console.log(linksSet);
+    console.log('Found '+Object.keys(linksSet).length+' unique links');
+    for (i = 0; i < Object.keys(linksSet).length; i++)
+    {
         (function(i) {
-            href = policiesLinks[i].href;
-            iframe = $('<iframe src="' + policiesLinks[i] + '" style="display: none"></iframe>');
+            var href = Object.keys(linksSet)[i];
+            iframe = $('<iframe src="' + href + '" style="display: none"></iframe>');
             iframe.on('load', function () {
                 var inputContent = sanitizeAndSplitSentences(this.contentWindow.document.body.innerText);
                 getScams(inputContent, function (scams) {
                     console.log("Found " + scams.length + " scams in " + href);
+                    if(scams.length != 0)
+                    {
+                        KlauzulexUI.showRulesWarning(href);
+                    }
                 });
             });
             iframe.appendTo('body');

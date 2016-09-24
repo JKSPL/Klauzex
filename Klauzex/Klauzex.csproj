@@ -41,6 +41,7 @@
   <ItemGroup>
     <Content Include="app\algosy.js" />
     <Content Include="app\contentScript.js" />
+    <Content Include="app\data\slowa.txt" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
     <Content Include="app\popup.html" />

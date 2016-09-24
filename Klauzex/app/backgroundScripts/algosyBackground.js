@@ -379,7 +379,7 @@ function initAlgosy(clauses, onReady) {
             var accumulator = [];
             var gotClauses = request.input;
             for (var i = 0; i < gotClauses.length; i++) {
-                var result = sanitize(gotClauses[i]);
+                var result = sanitizeSingle(gotClauses[i]);
                 console.log("KOMPRESJA");
                 console.log("Z: " + gotClauses[i]);
                 console.log("DO: " + result);

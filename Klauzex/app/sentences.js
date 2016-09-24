@@ -33,7 +33,7 @@ function sanitizeText(inputString)
 
         prefixes = [' ', '('];
         for (j = 0; j < prefixes.length; j++)
-            inputString = inputString.replace(new RegExp('('+escapeRegExp(prefixes[j] + abbvs[i])+')\\.', 'gi'), '$1\$');
+            inputString = inputString.replace(new RegExp('(' + escapeRegExp(prefixes[j] + escapedAbbv) + ')\\.', 'gi'), '$1\$');
     }
 
     return inputString;

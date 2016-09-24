@@ -39,8 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="data\slowa.txt" />
-    <Content Include="scripts\algosy.js" />
+    <Content Include="app\algosy.js" />
+    <Content Include="app\contentScript.js" />
+    <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
@@ -50,16 +51,9 @@
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
+    <Content Include="app\clauseRepository.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
-    <Content Include="scripts\clauseRepository.js" />
-    <Content Include="web.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\manifest.json" />
@@ -77,7 +71,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1530</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

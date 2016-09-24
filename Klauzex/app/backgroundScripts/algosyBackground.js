@@ -266,6 +266,7 @@ function trimToApostrophes(str) {
 function sanitizeSingle(clause) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     clause = sanitizeText(clause);
+    clause = trim(clause);
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     clause = clause.replace(new RegExp("(\\((.*?)\\))", "ig"), "");
     clause = clause.replace(new RegExp("(\\[(.*?)\\])", "ig"), "");

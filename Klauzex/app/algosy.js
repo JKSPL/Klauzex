@@ -1,6 +1,8 @@
 ﻿function generateText(clauses) {
     var acc = "";
     for (var i = 0; i < clauses.length; i++) {
+        acc += i.toString();
+        acc += ". ";
         acc += clauses[i].clause;
         acc += "<br>";
     }
@@ -24,7 +26,7 @@ function trimToChar(str, char1, char2) {
 }
 
 function trimToApostrophes(str) {
-    return trimToChar(str, '„', '”');
+    return trimToChar(str, '"', '"');
 }
 
 function sanitize(clauses) {
@@ -34,6 +36,9 @@ function sanitize(clauses) {
     for (var i = 0; i < clauses.length; i++) {
         clauses[i].clause = trimToApostrophes(clauses[i].clause);
     }
+    clauses = clauses.filter(function (clause) {
+        return clause.clause != "";
+    });
     return clauses;
 }
 
@@ -55,14 +60,22 @@ function getScams(plaintext) {
     }
 }
 
-chrome.storage.local.get("dictionary", function (clauses) {
-    clauses = clauses.dictionary;
-    readyClauses = true;
-    globalClauses = clauses;
-    console.log(getScams("asd asd 123"));
-    //window.globalClauses = clauses;
-    //console.log(globalClauses);
-    //var filtered = sanitize(clauses);
-    //document.body.innerHTML = generateText(filtered);
-})
+function init(clauses, onReady) {
+    chrome.storage.local.get("dictionary", function (clauses) {
+        clauses = clauses.dictionary;
+        console.log(clauses[0].clause);
+        readyClauses = true;
+        globalClauses = clauses;
+        console.log(getScams("asd asd 123"));
+        //window.globalClauses = clauses;
+        //console.log(globalClauses);
+        var filtered = sanitize(clauses);
+        document.body.innerHTML = generateText(filtered);
+        if (onReady) {
+            onReady();
+        }
+    });
+}
+
+
 

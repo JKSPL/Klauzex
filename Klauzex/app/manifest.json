@@ -17,7 +17,7 @@
 	],
 
 	"background" : {
-		"scripts" : ["eventPage.js"],
+		"scripts" : ["clauseRepository.js", "eventPage.js"],
 		"persistent" : true,
 		"permissions" :
 		[

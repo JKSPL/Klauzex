@@ -6,8 +6,18 @@ function findScams()
     var inputContent = document.body.innerText;
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
-        // TODO: if(scams.length != 0)
-        findScamsInLinks();
+        uiArray = [];
+        for (i = 0; i < scams.length; i++)
+        {
+            console.log(scams[i]);
+            uiArray.push({id: scams[i].clause, clause: scams[i].text})
+        }
+        if(scams.length == 0)
+            findScamsInLinks();
+        else
+        {
+            KlauzulexUI.showWarning(uiArray);
+        }
     });
 }
 

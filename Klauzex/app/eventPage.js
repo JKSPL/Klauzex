@@ -5,6 +5,10 @@ function updateDictionary() {
     console.log('updating dictionary...');
     Clauses.get('https://www.uokik.gov.pl/download.php?id=1064').then(
         function (dict) {
+            for (i = 0; i < dict.length; i++)
+            {
+                dict[i] = sanitizeText(dict[i]);
+            }
             initAlgosy(dict, function () { console.log('dictionary updated!') });
         });
 }

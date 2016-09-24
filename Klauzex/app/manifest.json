@@ -8,7 +8,7 @@
 	[{
 			"matches" : ["<all_urls>"],
             "css": [ "css/dist/semantic.min.css", "css/style.css"],
-			"js" : ["thirdParty/jquery-3.1.1.min.js", "mark.js", "algosy.js", "ui.js", "contentScript.js", "clauseRepository.js"],
+			"js" : ["thirdParty/jquery-3.1.1.min.js", "mark.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
 			"permissions" :
 			[
 				"storage"
@@ -17,7 +17,7 @@
 	],
 
 	"background" : {
-		"scripts" : ["clauseRepository.js", "backgroundScripts/algosyBackground.js" , "eventPage.js"],
+		"scripts" : ["clauseRepository.js", "backgroundScripts/algosyBackground.js", , "sentences.js", "eventPage.js"],
 		"persistent" : true,
 		"permissions" :
 		[

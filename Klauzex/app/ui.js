@@ -3,23 +3,47 @@ KlauzulexUI = (function() {
     var MAX_CLAUSES = 3;
 
     return {
-        showWarning: showWarning
+        showWarning: showWarning,
+        showRulesWarning: showRulesWarning
     };
 
     function showWarning(clauses) {
+        var nonEmpty = clauses.filter(function(c) { 
+            return c.clause.replace(/ /g,'').length > 0; 
+        });
+        if (nonEmpty.length === 0)
+            return;
+
         clauses = clauses.slice(0, MAX_CLAUSES);
-        var listItems = clauses.map(__getListItem).join("");
-        var list = "<ul class='list'>" + listItems + "</ul>";
-        var warning = $("<div id='klauzulex-warning' class='ui negative message'><div class='header'>Ostrzeżenie<span class='close'>Rozumiem</span></div><p>Wykryto niedozowolone klauzule w regulaminie:</p>" + list + "<p>Ten sprzedawca może chcieć Cie oszukać.</p></div>");
-        var close = warning.find('.close');
-        close.click(function() {
-            $(this).closest('.message').hide();
+        var list = clauses.map(__getListItem).join("");
+
+        var notification = new NotificationFx({
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br> Regulamin może zawierać klauzule niedozwolone:</p>' + list + '</div>',
+            layout: 'bar',
+            effect: 'slidetop',
+            ttl: 9999999,
+            type: 'error', // notice, warning or error
+            onOpen: function() {
+                $('#klauzulex-warning a').click(function(e) {
+                    e.preventDefault();
+                    __centerElement($(e.target.getAttribute('href')));
+                });
+            }
         });
-        warning.find('.list a').click(function(e) {
-            e.preventDefault();
-            __centerElement($(e.target.getAttribute('href')));
+        // show the notification
+        notification.show();
+    }
+
+    function showRulesWarning(link) {
+        var notification = new NotificationFx({
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p></div>',
+            layout: 'bar',
+            effect: 'slidetop',
+            ttl: 9999999,
+            type: 'error', // notice, warning or error
         });
-        $('body').append(warning);
+        // show the notification
+        notification.show();
     }
 
     function __getListItem(clauseInfo) {
@@ -31,7 +55,7 @@ KlauzulexUI = (function() {
             }
         });
         var anchor = "#" + ANCHOR_REF + '-' + clauseInfo.id;
-        return "<li><a href='" + anchor + "'>" + clauseInfo.clause + "</a></li>";
+        return "<p class='clause'><a href='" + anchor + "'>" + clauseInfo.clause + "</a></p>";
     }
 
     function __centerElement(el) {

@@ -39,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="data\slowa.txt" />
     <Content Include="scripts\algosy.js" />
     <Content Include="app\img\icon.png" />
     <Content Include="app\popup.html" />

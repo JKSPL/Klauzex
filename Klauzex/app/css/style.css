@@ -7,4 +7,13 @@ mark {
 
 .ns-box .clause a {
     color: rgba(250, 251, 255, 0.952941) !important;
+    font-size: inherit !important;
+}
+
+.ns-box .ns-box-inner {
+    font-size: inherit !important;
+}
+
+.ns-box p {
+    line-height: 1.2 !important;
 }

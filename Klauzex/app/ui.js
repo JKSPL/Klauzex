@@ -49,15 +49,19 @@ KlauzulexUI = (function() {
         notification.show();
     }
 
-    function __getListItem(clauseInfo) {
+    function __getListItem(clauseInfo, idx) {
         $('body').mark(clauseInfo.clause, {
             separateWordSearch: false,
             acrossElements: true,
             each: function(el) {
-                $(el).attr('id', ANCHOR_REF + '-' + clauseInfo.id);
+                $(el).attr('id', ANCHOR_REF + '-' + idx);
+            },
+            filter: function(text, term, allCount, count) {
+                // Only highlight first one
+                return count == 0;
             }
         });
-        var anchor = "#" + ANCHOR_REF + '-' + clauseInfo.id;
+        var anchor = "#" + ANCHOR_REF + '-' + idx;
         return "<br/><p class='clause'><a href='" + anchor + "'>" + clauseInfo.clause + "</a></p>";
     }
 

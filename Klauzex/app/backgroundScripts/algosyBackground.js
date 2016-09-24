@@ -44,7 +44,7 @@ function sanitize(clauses) {
     return clauses;
 }
 
-function init(clauses, onReady) {
+function initAlgosy(clauses, onReady) {
     readyClauses = true;
     globalClauses = clauses;
     var processedClauses = sanitize(clauses);

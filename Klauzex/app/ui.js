@@ -28,6 +28,9 @@ KlauzulexUI = (function() {
                     e.preventDefault();
                     __centerElement($(e.target.getAttribute('href')));
                 });
+            },
+            onClose: function() {
+                $('body').unmark();
             }
         });
         // show the notification
@@ -36,7 +39,7 @@ KlauzulexUI = (function() {
 
     function showRulesWarning(link) {
         var notification = new NotificationFx({
-            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p></div>',
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p></div>',
             layout: 'bar',
             effect: 'slidetop',
             ttl: 9999999,
@@ -55,7 +58,7 @@ KlauzulexUI = (function() {
             }
         });
         var anchor = "#" + ANCHOR_REF + '-' + clauseInfo.id;
-        return "<p class='clause'><a href='" + anchor + "'>" + clauseInfo.clause + "</a></p>";
+        return "<br/><p class='clause'><a href='" + anchor + "'>" + clauseInfo.clause + "</a></p>";
     }
 
     function __centerElement(el) {

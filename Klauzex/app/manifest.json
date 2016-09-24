@@ -17,7 +17,7 @@
 	],
 
 	"background" : {
-		"scripts" : ["clauseRepository.js", "backgroundScripts/algosyBackground.js", , "sentences.js", "eventPage.js"],
+		"scripts" : ["clauseRepository.js", "backgroundScripts/algosyBackground.js", "sentences.js", "eventPage.js"],
 		"persistent" : true,
 		"permissions" :
 		[

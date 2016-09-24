@@ -1,36 +1,10 @@
-#klauzulex-warning {
-    position: fixed;
-    top: 0;
-    left: 10px;
-    z-index: 9999;
-    text-align: left;
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-}
-
-#klauzulex-warning .header {
-	background-color: inherit;
-	border: none;
-	padding: 0;
-}
-
-#klauzulex-warning .close {
-    font-size: 1em;
-    font-weight: normal;
-    float: right;
-    color: inherit;
-    cursor: pointer;
-}
-
-#klauzulex-warning li a {
-    background: 0 0;
-    color: #4183C4;
-    text-decoration: none;
-}
-
 mark {
 	background-color: red;
 	color: white;
 	padding: 3px;
 	font-weight: bold;
+}
+
+.ns-box .clause a {
+    color: rgba(250, 251, 255, 0.952941) !important;
 }

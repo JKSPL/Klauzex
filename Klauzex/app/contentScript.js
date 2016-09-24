@@ -1,5 +1,4 @@
-﻿
-//findScams()
+﻿//findScams()
 console.log(sanitizeAndSplitSentences(document.body.innerText));
 
 function findScams()
@@ -8,27 +7,25 @@ function findScams()
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
         uiArray = [];
-        for (i = 0; i < scams.length; i++)
-        {
+        for (i = 0; i < scams.length; i++) {
             console.log(scams[i]);
-            uiArray.push({id: scams[i].clause, clause: scams[i].text})
+            uiArray.push({
+                id: scams[i].clause,
+                clause: scams[i].text
+            })
         }
-        if(scams.length == 0)
-            findScamsInLinks();
-        else
-        {
+        if (scams.length == 0) findScamsInLinks();
+        else {
             KlauzulexUI.showWarning(uiArray);
         }
     });
 }
 
-function findScamsInLinks()
-{
+function findScamsInLinks() {
     policiesLinks = findLinksWithPolicies();
     console.log('Found ' + policiesLinks.length + ' links');
-    for (i = 0; i < policiesLinks.length; i++)
-    {
-        (function (i) {
+    for (i = 0; i < policiesLinks.length; i++) {
+        (function(i) {
             href = policiesLinks[i].href;
             iframe = $('<iframe src="' + policiesLinks[i] + '" style="display: none"></iframe>');
             iframe.on('load', function () {
@@ -39,26 +36,19 @@ function findScamsInLinks()
             });
             iframe.appendTo('body');
         })(i)
-        
     }
 }
 
-function findLinksWithPolicies()
-{
+function findLinksWithPolicies() {
     var policiesLinks = [];
     var policiesTerms = ["regulamin", "zasady", "warunki", "reguły"];
-
     $('a').each(function() {
-        for (i = 0; i < policiesTerms.length; i++)
-        {
-            if (this.innerHTML.toLowerCase().indexOf(policiesTerms[i]) != -1)
-            {
+        for (i = 0; i < policiesTerms.length; i++) {
+            if (this.innerHTML.toLowerCase().indexOf(policiesTerms[i]) != -1) {
                 policiesLinks.push(this);
                 break;
             }
         }
     });
-    
     return policiesLinks;
 }
-

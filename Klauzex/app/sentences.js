@@ -14,7 +14,8 @@ var abbvs = [
 
 function sanitizeText(inputString)
 {
-    inputString = inputString.replace(new RegExp('\s', 'g'), ' ');
+    inputString = inputString.replace(new RegExp('\\n', 'g'), '. ');
+    inputString = inputString.replace(new RegExp('\\s', 'g'), ' ');
     for (i = 0; i < abbvs.length; i++) {
         prefixes = [' ', '('];
         sufixes = ['. ', '.,', '.:', '.;' ];
@@ -22,7 +23,6 @@ function sanitizeText(inputString)
             for (k = 0; k < sufixes.length; k++)
                 inputString = inputString.replace(new RegExp(escapeRegExp(prefixes[j] + abbvs[i] + sufixes[k]), 'gi'), ' ');
     }
-    inputString = inputString.replace(new RegExp('\n', 'g'), '. ');
 
     return inputString;
 }
@@ -30,6 +30,7 @@ function sanitizeText(inputString)
 function sanitizeAndSplitSentences(inputString)
 {
     sanitizedText = sanitizeText(inputString);
+    console.log('text: '+sanitizedText);
     tab = sanitizedText.split('. ');
     for (i = 0; i < tab.length; i++)
         tab[i] = tab[i].trim();

@@ -4,6 +4,6 @@
     });
 }
 
-chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
-    document.body.innerHTML = response.html;
-});
+//chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
+//    document.body.innerHTML = response.html;
+//});

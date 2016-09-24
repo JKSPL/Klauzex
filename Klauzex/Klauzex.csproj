@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\algosy.js" />
+    <Content Include="app\backgroundScripts\algosyBackground.js" />
     <Content Include="app\contentScript.js" />
     <Content Include="app\data\slowa.txt" />
     <Content Include="app\eventPage.js" />

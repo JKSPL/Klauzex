@@ -8,8 +8,16 @@ var abbvs = [
     "itd",
     "ww",
     "ew",
-    "tzn"
-
+    "tzn",
+    'np',
+    'pkt',
+    'ul',
+    'pl',
+    'tj',
+    'tzw',
+    'zob',
+    'art',
+    'ust',
 ];
 
 function sanitizeText(inputString)
@@ -30,7 +38,6 @@ function sanitizeText(inputString)
 function sanitizeAndSplitSentences(inputString)
 {
     sanitizedText = sanitizeText(inputString);
-    console.log('text: '+sanitizedText);
     tab = sanitizedText.split('. ');
     for (i = 0; i < tab.length; i++)
         tab[i] = tab[i].trim();

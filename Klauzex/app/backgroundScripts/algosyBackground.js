@@ -37,6 +37,7 @@ var trashPrefix = [
     "dowoln",
     "powyższ",
     "poniższ",
+    "wcześn",
     "ewent",
     "email",
     "mail",
@@ -84,6 +85,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("administr") + "[\\S]*)",
             "(\\b" + escapeRegExp("siedzib") + "[\\S]*)",
             containsPrefix("program"),
+            containsPrefix("księgar"),
             "(\\b" + escapeRegExp("kurier") + "[\\S]*)",
             "(\\b" + escapeRegExp("spół") + "[\\S]*)",
             "(\\b" + escapeRegExp("pozwan") + "[\\S]*)",
@@ -92,6 +94,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("podmiot") + "[\\S]*)",
             "(\\b" + escapeRegExp("wydawc") + "[\\S]*)",
             "(\\b" + escapeRegExp("dostawc") + "[\\S]*)",
+            "(\\b" + escapeRegExp("wysył") + "[\\S]*)",
             "(\\b" + escapeRegExp("przewoz") + "[\\S]*)",
             containsPrefix("z ograniczoną odpowiedzialnością"),
             "(\\\"(.*?)\\\")",
@@ -109,6 +112,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("zamawiając") + "[\\S]*)",
             "(\\b" + escapeRegExp("nabyw") + "[\\S]*)",
             "(\\b" + escapeRegExp("użytkowni") + "[\\S]*)",
+            "(\\b" + escapeRegExp("odbiorc") + "[\\S]*)",
         ]
     },
     {
@@ -125,6 +129,7 @@ var rozponawanieRegexow = [
         tag: "commodity",
         regex: [
             containsPrefix("korzystanie z"),
+            containsPrefix("nagrod"),
             "(\\b" + escapeRegExp("dostarcz") + "[\\S]*)",
             containsPrefix("towar"),
             "(\\b" + escapeRegExp("produk") + "[\\S]+)",
@@ -194,6 +199,8 @@ var rozponawanieRegexow = [
             containsPrefix("nie ponosimy odp"),
             containsPrefix("nie odpowiad"),
             containsPrefix("nie jest odpow"),
+            containsPrefix("nie bierze odpow"),
+            containsPrefix("nie jest gwarantem"),
         ]
     },
     {
@@ -225,6 +232,8 @@ var rozponawanieRegexow = [
             containsPrefix("niedostarczeni"),
             containsPrefix("nieprawid"),
             containsPrefix("opóźni"),
+            containsPrefix("winy"),
+            containsPrefix("zgniecion"),
         ]
     },
     {
@@ -338,7 +347,7 @@ function sanitize(clauses) {
         clauses[i].clause = sanitizeSingle(clauses[i].clause);
     }
     clauses = clauses.filter(function (clause) {
-        return clause.clause.length > 21;
+        return clause.clause.length > 20;
     });
     return clauses;
 }

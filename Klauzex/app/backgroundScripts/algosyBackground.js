@@ -373,7 +373,11 @@ function initAlgosy(clauses, onReady) {
     readyClauses = true;
     globalClauses = clauses;
     var processedClauses = sanitize(clauses);
-
+    var hashedClauses = {
+    };
+    for (var i = 0; i < processedClauses.length; i++) {
+        hashedClauses[processedClauses[i].clause] = processedClauses[i].id;
+    }
     chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.request == "clauses") {
@@ -384,14 +388,11 @@ function initAlgosy(clauses, onReady) {
                 console.log("KOMPRESJA");
                 console.log("Z: '" + gotClauses[i] + "'");
                 console.log("DO: '" + result + "'");
-                for (var j = 0; j < processedClauses.length; j++) {
-                    if(processedClauses[j].clause == result){
-                        accumulator.push({
-                            text: gotClauses[i],
-                            clause: processedClauses[j].id
-                        });
-                        break;
-                    }
+                if(hashedClauses.hasOwnProperty(result)){
+                    accumulator.push({
+                        text: gotClauses[i],
+                        clause: hashedClauses[result]
+                    });
                 }
             }
             sendResponse(accumulator);

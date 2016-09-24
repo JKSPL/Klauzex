@@ -83,6 +83,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("firm") + "[\\S]*)",
             "(\\b" + escapeRegExp("administr") + "[\\S]*)",
             "(\\b" + escapeRegExp("siedzib") + "[\\S]*)",
+            containsPrefix("program"),
             "(\\b" + escapeRegExp("kurier") + "[\\S]*)",
             "(\\b" + escapeRegExp("spół") + "[\\S]*)",
             "(\\b" + escapeRegExp("pozwan") + "[\\S]*)",
@@ -91,6 +92,8 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("podmiot") + "[\\S]*)",
             "(\\b" + escapeRegExp("wydawc") + "[\\S]*)",
             "(\\b" + escapeRegExp("dostawc") + "[\\S]*)",
+            "(\\b" + escapeRegExp("przewoz") + "[\\S]*)",
+            containsPrefix("z ograniczoną odpowiedzialnością"),
             "(\\\"(.*?)\\\")",
         ]
     },
@@ -135,6 +138,7 @@ var rozponawanieRegexow = [
             containsPrefix("dostaw"),
             containsPrefix("zamów"),
             containsPrefix("zakup"),
+            containsPrefix("transakc"),
             "(\\b" + escapeRegExp("sprzeda") + "[\\S]+)",
             "(\\b" + escapeRegExp("używ") + "[\\S]+)",
             "(\\b" + escapeRegExp("otrzym") + "[\\S]+)",
@@ -177,6 +181,7 @@ var rozponawanieRegexow = [
         tag: "notResponsible",
         regex: [
             containsPrefix("nie ponosi odp"),
+            containsPrefix("nie gwarant"),
             containsPrefix("nie ponosimy odp"),
             containsPrefix("nie odpowiad"),
             containsPrefix("nie jest odpow"),

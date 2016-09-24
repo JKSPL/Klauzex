@@ -4,7 +4,7 @@ console.log(sanitizeAndSplitSentences(document.body.innerText));
 
 function findScams()
 {
-    var inputContent = document.body.innerText;
+    var inputContent = sanitizeAndSplitSentences(document.body.innerText);
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
         uiArray = [];
@@ -32,7 +32,7 @@ function findScamsInLinks()
             href = policiesLinks[i].href;
             iframe = $('<iframe src="' + policiesLinks[i] + '" style="display: none"></iframe>');
             iframe.on('load', function () {
-                var inputContent = this.contentWindow.document.body.innerText;
+                var inputContent = sanitizeAndSplitSentences(this.contentWindow.document.body.innerText);
                 getScams(inputContent, function (scams) {
                     console.log("Found " + scams.length + " scams in " + href);
                 });

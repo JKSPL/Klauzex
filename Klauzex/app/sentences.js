@@ -22,7 +22,7 @@ var abbvs = [
 
 function sanitizeText(inputString)
 {
-    inputString = inputString.replace(new RegExp('\\n', 'g'), '. ');
+    inputString = inputString.replace(new RegExp('\\n', 'g'), ' ');
     inputString = inputString.replace(new RegExp('\\s', 'g'), ' ');
     for (i = 0; i < abbvs.length; i++) {
         prefixes = [' ', '('];

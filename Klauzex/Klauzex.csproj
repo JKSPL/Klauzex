@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="scripts\algosy.js" />
+    <Content Include="app\algosy.js" />
     <Content Include="app\contentScript.js" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
@@ -51,6 +51,7 @@
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
+    <Content Include="app\clauseRepository.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
   </ItemGroup>

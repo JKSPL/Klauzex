@@ -85,6 +85,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("usługodaw") + "[\\S]+)",
             "(\\b" + escapeRegExp("internetow") + "[\\S]+)",
             "(\\b" + escapeRegExp("sprzedawc") + "[\\S]+)",
+            "(\\b" + escapeRegExp("sprzedający") + "[\\S]+)",
             "(\\b" + escapeRegExp("firm") + "[\\S]*)",
             "(\\b" + escapeRegExp("administr") + "[\\S]*)",
             "(\\b" + escapeRegExp("siedzib") + "[\\S]*)",

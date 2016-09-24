@@ -17,6 +17,6 @@
     });
 }
 
-/*chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
+chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
     document.body.innerHTML = response.html;
-});*/
+});

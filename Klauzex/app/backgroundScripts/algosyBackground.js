@@ -12,7 +12,6 @@ var trashExact = [
     "®",
     "w/w",
     "treść",
-    "zł",
     "ww.",
     "ew.",
     "tzn.",
@@ -20,7 +19,6 @@ var trashExact = [
     "...",
     "sobie",
     "także",
-
 ];//wywala insensitive
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
@@ -36,9 +34,11 @@ var useless = [
 ]
 
 var trashPrefix = [
+    "dowoln",
     "powyższ",
     "poniższ",
     "ewent",
+    "email",
     "mail",
     "każd",
     "żadn",
@@ -118,6 +118,7 @@ var rozponawanieRegexow = [
             "(\\bzapis[\\w]+)",
             "(\\bprzywilej[\\w]+)",
             "(\\bprzepis[\\w]+)",
+            "(\\bzasad[\\w]+)",
         ]
     },
     {
@@ -142,6 +143,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("sprzeda") + "[\\S]+)",
             "(\\b" + escapeRegExp("używ") + "[\\S]+)",
             "(\\b" + escapeRegExp("otrzym") + "[\\S]+)",
+            "(\\b" + escapeRegExp("odebr") + "[\\S]+)",
             "(\\b" + escapeRegExp("ofer") + "[\\S]+)",
         ]
     },
@@ -171,10 +173,17 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("zastrzegają moż") + "[\\S]*)",
             "(\\b" + escapeRegExp("zastrzegamy praw") + "[\\S]*)",
             "(\\b" + escapeRegExp("ma prawo do zmian") + "[\\S]*)",
+            "(\\b" + escapeRegExp("ma prawo wprowadzania zmian") + "[\\S]*)",
             "(\\b" + escapeRegExp("prawo do zmian") + "[\\S]*)",
             "(\\b" + escapeRegExp("prawo do zmian") + "[\\S]*)",
             "(\\b" + escapeRegExp("może zostać zmieniony") + "[\\S]*)",
             "(\\b" + escapeRegExp("jest uprawniony") + "[\\S]*)",
+        ]
+    },
+    {
+        tag: "change",
+        regex: [
+            containsPrefix("zmian"),
         ]
     },
     {
@@ -213,6 +222,7 @@ var rozponawanieRegexow = [
             containsPrefix("wad"),
             containsPrefix("usterk"),
             containsPrefix("zaginię"),
+            containsPrefix("niedostarczeni"),
             containsPrefix("nieprawid"),
             containsPrefix("opóźni"),
         ]
@@ -221,9 +231,16 @@ var rozponawanieRegexow = [
         tag: "isValidSince",
         regex: [
             containsPrefix("wchodzi w życie od"),
+            containsPrefix("będą ważne od"),
             containsPrefix("obowiązuje od"),
             containsPrefix("obowiązują od"),
             containsPrefix("wchodzą w życie od"),
+        ]
+    },
+    {
+        tag: "warranty",
+        regex: [
+            containsPrefix("gwaran"),
         ]
     }
 ];

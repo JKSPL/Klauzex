@@ -41,6 +41,13 @@ var useless = [
     "(\\b" + escapeRegExp("al.") + "[\\S]*)",
 ]
 
+var suspicious = [
+    {
+        subclause: "#complaint# będą #judgedecide# przez #judge# dla #company#",
+        id: 2686
+    }
+]
+
 var trashPrefix = [
     "dowoln",
     "powyższ",
@@ -54,6 +61,7 @@ var trashPrefix = [
     "żaden",
     "treśc",
     "właściw",
+    "miejscow",
     "jakiekolw",
     "niniej",
     "wszelk",
@@ -79,6 +87,7 @@ var rozponawanieRegexow = [
     {
         tag: "company",
         regex: [
+            "(\\\"(.*?)\\\")",
             "([\\S]+" + escapeRegExp(".pl/") + ")",
             "([\\S]+" + escapeRegExp(".pl") + ")",
             "([\\S]+" + escapeRegExp(".com") + ")",
@@ -105,8 +114,7 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("dostawc") + "[\\S]*)",
             "(\\b" + escapeRegExp("wysyłając") + "[\\S]*)",
             "(\\b" + escapeRegExp("przewoź") + "[\\S]*)",
-            containsPrefix("z ograniczoną odpowiedzialnością"),
-            "(\\\"(.*?)\\\")",
+            containsPrefix("z ograniczoną odpowiedzialnością")
         ]
     },
     {
@@ -277,6 +285,19 @@ var rozponawanieRegexow = [
             containsPrefix("jeżeli"),
             containsPrefix("o ile"),
         ]
+    },
+    {
+        tag: "law",
+        regex: [
+            containsPrefix("kodeks"),
+            containsPrefix("cywiln"),
+        ]
+    },
+    {
+        tag: "incase",
+        regex: [
+            containsPrefix("w przyp"),
+        ]
     }
 ];
 
@@ -415,6 +436,16 @@ function initAlgosy(clauses, onReady) {
                         text: gotClauses[i],
                         clause: hashedClauses[result]
                     });
+                } else {
+                    for (var j = 0; j < suspicious.length; j++) {
+                        if (result.indexOf(suspicious[j].subclause) != -1) {
+                            accumulator.push({
+                                text: gotClauses[i],
+                                clause: suspicious[j].id
+                            });
+                            break;
+                        }
+                    }
                 }
             }
             sendResponse(accumulator);

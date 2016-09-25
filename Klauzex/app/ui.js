@@ -58,7 +58,7 @@ KlauzulexUI = (function() {
         }).join("");
 
         var notification = new NotificationFx({
-            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + "</a></p><br/>Znalezione klauzule:" + clausesItems + '<br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div></div>',
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + "</a></p><br/><p>Znalezione klauzule:</p>" + clausesItems + '<br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div></div>',
             layout: 'bar',
             effect: 'slidetop',
             ttl: 9999999,

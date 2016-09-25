@@ -9,7 +9,7 @@
     },
     "content_scripts": [{
         "matches": ["<all_urls>"],
-        "exclude_matches": ["*://*.google.com/*", "*://*.google.pl/*"],
+        "exclude_matches": ["*://*.google.com/*", "*://*.google.pl/*", "*://*.facebook.com/*"],
 		"css": ["css/semantic-popup.min.css", "css/ns-default.css", "css/ns-style-bar.css", "css/style.css"],
         "js": ["thirdParty/jquery-3.1.1.min.js", "storage.js", "thirdParty/semantic-popup.min.js", "thirdParty/mark.js", "thirdParty/modernizr.custom.js", "thirdParty/classie.js", "thirdParty/notificationFx.js", "thirdParty/pdf.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
         "permissions": ["storage"],

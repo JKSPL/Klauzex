@@ -68,20 +68,35 @@ function findScamInLinked(text, href)
 {
     var inputContent = sanitizeAndSplitSentences(text);
     getScams(inputContent, function (scams) {
-        scams = scams.getUnique();
+        uniqueScams = [];
+        for (i = 0; i < scams.length; i++)
+        {
+            found = false;
+            for(j = 0; j < uniqueScams.length; j++)
+            {
+                if(uniqueScams[j].clause == scams[i].clause)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                uniqueScams.push(scams[i]);
+            }
+        }
         chrome.storage.local.get({ 'dictionary': [] }, function (result) {
             dict = result.dictionary;
             uiArray = [];
-            for (i = 0; i < scams.length; i++) {
+            for (i = 0; i < uniqueScams.length; i++) {
                 uiArray.push({
-                    id: scams[i].clause,
-                    clause: scams[i].text,
-                    original: dict[scams[i].clause - 1]
+                    id: uniqueScams[i].clause,
+                    clause: uniqueScams[i].text,
+                    original: dict[uniqueScams[i].clause - 1]
                 });
             }
-            console.log("Found " + scams.length + " scams in " + href);
-            if (scams.length != 0) {
-                console.log(scams);
+            console.log("Found " + uniqueScams.length + " scams in " + href);
+            if (uniqueScams.length != 0) {
+                console.log(uniqueScams);
                 KlauzulexUI.showRulesWarning(href, uiArray);
             }
         });

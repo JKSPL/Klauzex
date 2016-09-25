@@ -69,10 +69,22 @@ function findScamInLinked(text, href)
     var inputContent = sanitizeAndSplitSentences(text);
     getScams(inputContent, function (scams) {
         scams = scams.getUnique();
+        chrome.storage.local.get({ 'dictionary': [] }, function (result) {
+            dict = result.dictionary;
+            uiArray = [];
+            for (i = 0; i < scams.length; i++) {
+                uiArray.push({
+                    id: scams[i].clause,
+                    clause: scams[i].text,
+                    original: dict[scams[i].clause - 1]
+                });
+            }
+        });
         console.log("Found " + scams.length + " scams in " + href);
+        console.log(inputContent);
         if (scams.length != 0) {
             console.log(scams);
-            KlauzulexUI.showRulesWarning(href);
+            KlauzulexUI.showRulesWarning(href, uiArray);
         }
     });
 }

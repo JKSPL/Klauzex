@@ -1,4 +1,5 @@
-﻿getWhitelistedDomains(function(domains)
+﻿
+getWhitelistedDomains(function (domains)
 {
     if(domains.indexOf(document.domain) == -1)
         findScams();
@@ -21,13 +22,13 @@ function findScams()
                 console.log(dict);
                 uiArray = [];
                 for (i = 0; i < scams.length; i++) {
-                    console.log(scams[i]);
                     uiArray.push({
                         id: scams[i].clause,
                         clause: scams[i].text,
-                        original: dict[i-1]
+                        original: dict[scams[i].clause - 1]
                     })
                 }
+                console.log(uiArray);
                 KlauzulexUI.showWarning(uiArray);
             })
         }

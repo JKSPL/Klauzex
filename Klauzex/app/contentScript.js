@@ -79,13 +79,12 @@ function findScamInLinked(text, href)
                     original: dict[scams[i].clause - 1]
                 });
             }
+            console.log("Found " + scams.length + " scams in " + href);
+            if (scams.length != 0) {
+                console.log(scams);
+                KlauzulexUI.showRulesWarning(href, uiArray);
+            }
         });
-        console.log("Found " + scams.length + " scams in " + href);
-        console.log(inputContent);
-        if (scams.length != 0) {
-            console.log(scams);
-            KlauzulexUI.showRulesWarning(href, uiArray);
-        }
     });
 }
 

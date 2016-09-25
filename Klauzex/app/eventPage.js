@@ -5,6 +5,7 @@ function updateDictionary() {
     console.log('updating dictionary...');
     Clauses.get('https://www.uokik.gov.pl/download.php?id=1064').then(
         function (dict) {
+            chrome.storage.local.set({ 'dictionary': dict });
             initAlgosy(dict, function () { console.log('dictionary updated!') });
         });
 }

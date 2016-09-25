@@ -10,20 +10,26 @@ function findScams()
     console.log(inputContent);
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
-        uiArray = [];
-        for (i = 0; i < scams.length; i++) {
-            console.log(scams[i]);
-            uiArray.push({
-                id: scams[i].clause,
-                clause: scams[i].text
-            })
-        }
         if (scams.length == 0)
         {
             findScamsInLinks();
         }
         else {
-            KlauzulexUI.showWarning(uiArray);
+            chrome.storage.local.get({ 'dictionary': [] }, function (result)
+            {
+                dict = result.dictionary;
+                console.log(dict);
+                uiArray = [];
+                for (i = 0; i < scams.length; i++) {
+                    console.log(scams[i]);
+                    uiArray.push({
+                        id: scams[i].clause,
+                        clause: scams[i].text,
+                        original: dict[i-1]
+                    })
+                }
+                KlauzulexUI.showWarning(uiArray);
+            })
         }
     });
 }

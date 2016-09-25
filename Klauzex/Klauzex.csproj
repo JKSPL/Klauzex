@@ -47,7 +47,6 @@
     <Content Include="app\demoForm.html" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
-    <Content Include="app\mark.js" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
     <Content Include="app\sentences.js" />

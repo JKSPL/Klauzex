@@ -43,6 +43,8 @@
     <Content Include="app\backgroundScripts\algosyBackground.js" />
     <Content Include="app\contentScript.js" />
     <Content Include="app\data\slowa.txt" />
+    <Content Include="app\demo.js" />
+    <Content Include="app\demoForm.html" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
     <Content Include="app\mark.js" />
@@ -61,6 +63,13 @@
     <Content Include="app\clauseRepository.js" />
     <None Include="scripts\_references.js" />
     <None Include="scripts\chrome-api-vsdoc.js" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\manifest.json" />

@@ -49,6 +49,7 @@
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
     <Content Include="app\sentences.js" />
+    <Content Include="app\storage.js" />
     <Content Include="app\thirdParty\jquery-3.1.1.min.js" />
     <Content Include="app\ui.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />

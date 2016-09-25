@@ -1,4 +1,8 @@
-﻿findScams();
+﻿getWhitelistedDomains(function(domains)
+{
+    if(domains.indexOf(document.domain) == -1)
+        findScams();
+})
 
 function findScams()
 {
@@ -67,3 +71,4 @@ function findLinksWithPolicies() {
     });
     return policiesLinks;
 }
+

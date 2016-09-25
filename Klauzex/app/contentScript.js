@@ -1,17 +1,14 @@
 ﻿
+PDFJS.workerSrc = 'https://nopaste.me/view/raw/6f532bfc';
 getWhitelistedDomains(function (domains)
 {
     if(domains.indexOf(document.domain) == -1)
         findScams();
 })
 
-PDFJS.workerSrc = 'https://nopaste.me/view/raw/6f532bfc';
-findScamsInLinks();
-
 function findScams()
 {
     var inputContent = sanitizeAndSplitSentences(document.body.innerText);
-    console.log(inputContent);
     getScams(inputContent, function (scams) {
         console.log("Found " + scams.length + " scams in page");
         if (scams.length == 0)
@@ -22,7 +19,6 @@ function findScams()
             chrome.storage.local.get({ 'dictionary': [] }, function (result)
             {
                 dict = result.dictionary;
-                console.log(dict);
                 uiArray = [];
                 for (i = 0; i < scams.length; i++) {
                     uiArray.push({
@@ -41,20 +37,16 @@ function findScams()
 function findScamsInLinks() {
     policiesLinks = findLinksWithPolicies();
     console.log('Found ' + policiesLinks.length + ' links');
-    linksSet = {};
-    for (i = 0; i < policiesLinks.length; i++)
-    {
-        linksSet[policiesLinks[i].href] = true;
-    }
-    console.log(linksSet);
-    console.log('Found '+Object.keys(linksSet).length+' unique links');
-    for (i = 0; i < Object.keys(linksSet).length; i++)
+    uniqueLinks = policiesLinks.getUnique();;
+    console.log(uniqueLinks);
+    console.log('Found ' + uniqueLinks.length + ' unique links');
+    for (i = 0; i < uniqueLinks.length; i++)
     {
         (function(i) {
-            var href = Object.keys(linksSet)[i];
+            var href = uniqueLinks[i].href;
             if(href.endsWith('pdf'))
             {
-                new Pdf2TextClass().pdfToText(Object.keys(linksSet)[i], function(s, t) {},
+                new Pdf2TextClass().pdfToText(href, function (s, t) { },
                 function(text)
                 {
                     findScamInLinked(text, href);
@@ -76,6 +68,7 @@ function findScamInLinked(text, href)
 {
     var inputContent = sanitizeAndSplitSentences(text);
     getScams(inputContent, function (scams) {
+        scams = scams.getUnique();
         console.log("Found " + scams.length + " scams in " + href);
         if (scams.length != 0) {
             console.log(scams);
@@ -159,3 +152,15 @@ function Pdf2TextClass() {
         });
     }; // end of pdfToText()
 }; // end of class
+
+Array.prototype.getUnique = function () {
+    var u = {}, a = [];
+    for (var i = 0, l = this.length; i < l; ++i) {
+        if (u.hasOwnProperty(this[i])) {
+            continue;
+        }
+        a.push(this[i]);
+        u[this[i]] = 1;
+    }
+    return a;
+}

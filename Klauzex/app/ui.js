@@ -42,9 +42,23 @@ KlauzulexUI = (function() {
         notification.show();
     }
 
-    function showRulesWarning(link) {
+    function showRulesWarning(link, clauses) {
+        var MAX_CLAUSES = 3;
+        var nonEmpty = clauses.filter(function(c) { 
+            return c.clause.replace(/ /g,'').length > 0; 
+        });
+        if (nonEmpty.length === 0)
+            return;
+
+        clauses = clauses.slice(0, MAX_CLAUSES);
+
+        var clausesItems = clauses.map(function(clauseInfo) {
+            var clauseInfoUrl = 'http://decyzje.uokik.gov.pl/nd_wz_um.nsf/WWW-wszystkie?SearchView&Query=([FORM]%3DPostanowienie)%20AND%20([Nr_pos_T]%20%3D%20%22' + clauseInfo.id + '%22)';
+            return "<br/><p><a class='clause'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "' target='_blank'>link do klauzuli</a>)</p>";
+        }).join("");
+
         var notification = new NotificationFx({
-            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p><br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div></div>',
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + "</a></p><br/>Znalezione klauzule:" + clausesItems + '<br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div></div>',
             layout: 'bar',
             effect: 'slidetop',
             ttl: 9999999,

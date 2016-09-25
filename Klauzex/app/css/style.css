@@ -43,6 +43,7 @@ mark:hover {
 
 .ui.inverted.popup, .ui.inverted.popup:after, .ui.inverted.popup:before {
     background: rgba(158, 58, 56, 0.901961) !important;
-    font-size: 14px;
+    font-size: 14px !important;
+    z-index: 2147483646 !important;
 }
 

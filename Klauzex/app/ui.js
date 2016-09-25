@@ -98,7 +98,7 @@ KlauzulexUI = (function() {
        
         var anchor = "#" + ANCHOR_REF + '-' + idx;
         var clauseInfoUrl = 'http://decyzje.uokik.gov.pl/nd_wz_um.nsf/WWW-wszystkie?SearchView&Query=([FORM]%3DPostanowienie)%20AND%20([Nr_pos_T]%20%3D%20%22' + clauseInfo.id + '%22)';
-        return "<br/><p><a class='clause' href='" + anchor + "'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "'>link do klauzuli</a>)</p>";
+        return "<br/><p><a class='clause' href='" + anchor + "'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "' target='_blank'>link do klauzuli</a>)</p>";
     }
 
     function __centerElement(el) {

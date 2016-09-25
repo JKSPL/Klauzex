@@ -1,31 +1,52 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+  <meta charset="UTF-8">
 
-      img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
-    <script src="popup.js"></script>
-  </head>
-  <body>
-  </body>
+        <script src="thirdParty/jquery-3.1.1.min.js">
+        </script>
+        <script src="thirdParty/semantic.min.js">
+        </script>
+        <script src="backgroundScripts/algosyBackground.js">
+        </script>
+        <script src="demo.js">
+        </script>
+        <link href="css/semantic.min.css" rel="stylesheet" type="text/css">
+        </link>
+        <link href="css/style.css" rel="stylesheet">
+        </link>
+    </head>
+    <body>
+        <div class="ui text container" id="demo-container">
+            <!-- <div class="ui raised padded segment"> -->
+                <h1 class="ui dividing header">
+                    Klauzex demo
+                    <div class="sub header">
+                    Prosty skrypt demonstrujący działanie heurystyk unifikujących postanowienia regulaminów.
+                        
+                    </div>
+                </h1>
+                <p>
+                </p>
+                <div class="ui form">
+                    <div class="field">
+                        <label>
+                            Tekst wejściowy
+                        </label>
+                        <!-- <input class="ui input" id="input_string" placeholder="Wpisz tekst wejściowy..." type="text">
+                        </input> -->
+                        <textarea class="ui input" id="input_string" placeholder="Wpisz tekst wejściowy..." type="text" rows=4 col=50></textarea>
+                    </div>
+                </div>
+                <div class="ui secondary segment" style="min-height: 200px; font-size: 1.1em; margin-bottom: 2em">
+                    <h3 class="ui dividing header">
+                        Wynik
+                    </h3>
+                    <p id="output">
+                        Wpisz tekst aby zobaczyć jego reprezentację po unifikacji...
+                    </p>
+                </div>
+            </div>
+        <!-- </div> -->
+    </body>
 </html>
-

@@ -4,6 +4,7 @@
     "description": "Klauzex",
     "version": "1.0",
     "browser_action": {
+        "default_popup": "popup.html",
         "default_icon": "img/new_icon.png"
     },
     "content_scripts": [{

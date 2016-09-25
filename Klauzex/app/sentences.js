@@ -43,7 +43,7 @@ function sanitizeText(inputString)
 function sanitizeAndSplitSentences(inputString)
 {
     sanitizedText = sanitizeText(inputString);
-    tab = sanitizedText.split('.');
+    tab = sanitizedText.split('. ');
     for (i = 0; i < tab.length; i++)
     {
         tab[i] = tab[i].trim();

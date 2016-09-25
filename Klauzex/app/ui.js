@@ -18,15 +18,20 @@ KlauzulexUI = (function() {
         var list = clauses.map(__getListItem).join("");
 
         var notification = new NotificationFx({
-            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br> Regulamin może zawierać klauzule niedozwolone:</p>' + list + '</div>',
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br> Regulamin może zawierać klauzule niedozwolone:</p>' + list + '<br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div>',
             layout: 'bar',
             effect: 'slidetop',
             ttl: 9999999,
             type: 'error', // notice, warning or error
             onOpen: function() {
-                $('#klauzulex-warning a').click(function(e) {
+                $('#klauzulex-warning .clause').click(function(e) {
                     e.preventDefault();
                     __centerElement($(e.target.getAttribute('href')));
+                });
+                $('#klauzulex-warning .white-list').click(function(e) {
+                    e.preventDefault();
+                    notification.dismiss();
+                    addWhitelistedDomain(document.domain);
                 });
             },
             onClose: function() {
@@ -39,11 +44,18 @@ KlauzulexUI = (function() {
 
     function showRulesWarning(link) {
         var notification = new NotificationFx({
-            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p></div>',
+            message: '<div id="klauzulex-warning"><p><strong>Ostrzeżenie:</strong><br/> Regulamin może zawierać klauzule niedozwolone. Przejdź do regulaminu:</p><br/><p><a href="' + link + '">' + link + '</a></p><br/><a class="white-list">Nie pokazuj więcej na tej domenie</a></div></div>',
             layout: 'bar',
             effect: 'slidetop',
             ttl: 9999999,
             type: 'error', // notice, warning or error
+            onOpen: function() {
+                $('#klauzulex-warning .white-list').click(function(e) {
+                    e.preventDefault();
+                    notification.dismiss();
+                    addWhitelistedDomain(document.domain);
+                });
+            }
         });
         // show the notification
         notification.show();
@@ -62,7 +74,8 @@ KlauzulexUI = (function() {
             }
         });
         var anchor = "#" + ANCHOR_REF + '-' + idx;
-        return "<br/><p class='clause'><a href='" + anchor + "'>" + clauseInfo.clause + "</a></p>";
+        var clauseInfoUrl = 'http://decyzje.uokik.gov.pl/nd_wz_um.nsf/WWW-wszystkie?SearchView&Query=([FORM]%3DPostanowienie)%20AND%20([Nr_pos_T]%20%3D%20%22' + clauseInfo.id + '%22)';
+        return "<br/><p><a class='clause' href='" + anchor + "'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "'>link do klauzuli</a>)</p>";
     }
 
     function __centerElement(el) {

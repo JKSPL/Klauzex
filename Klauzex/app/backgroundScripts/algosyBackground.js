@@ -17,6 +17,12 @@ var trashExact = [
     "treść",
     "ww.",
     "ponadto",
+    "ich",
+    "tego",
+    "tej",
+    "temu",
+    "jej",
+    "jego",
     "również",
     "ew.",
     "tzn.",
@@ -45,6 +51,10 @@ var suspicious = [
     {
         subclause: "#complaint# będą #judgedecide# przez #judge# dla #company#",
         id: 2686
+    },
+    {
+        subclause: "#change# #codeofconduct# #isvalidsince# #publishdate#",
+        id: 2420
     }
 ]
 
@@ -209,7 +219,9 @@ var rozponawanieRegexow = [
     {
         tag: "change",
         regex: [
+            containsPrefix("zmiany dokonane w"),
             containsPrefix("zmian"),
+            containsPrefix("zmien"),
         ]
     },
     {
@@ -269,6 +281,7 @@ var rozponawanieRegexow = [
             containsPrefix("obowiązuje od"),
             containsPrefix("obowiązują od"),
             containsPrefix("wchodzą w życie z chwilą"),
+            containsPrefix("wchodzą w życie w momencie"),
         ]
     },
     {
@@ -297,6 +310,18 @@ var rozponawanieRegexow = [
         tag: "incase",
         regex: [
             containsPrefix("w przyp"),
+        ]
+    },
+    {
+        tag: "publishdate",
+        regex: [
+            containsPrefix("dnia udostępnienia ujednoliconego tekstu"),
+            containsPrefix("daty udostępnienia"),
+            containsPrefix("daty publikacji"),
+            containsPrefix("daty opublikowania"),
+            containsPrefix("opublikowania"),
+            containsPrefix("publikacji"),
+            containsPrefix("udostępnienia"),
         ]
     }
 ];

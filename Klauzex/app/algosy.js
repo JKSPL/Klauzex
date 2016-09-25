@@ -3,7 +3,7 @@
         gotAnswer(response);
     });
 }
-//console.log("wtf");
-//chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
-//    document.body.innerHTML = response.html;
-//});
+console.log("wtf");
+chrome.runtime.sendMessage({ request: "changeHtml" }, function (response) {
+    document.body.innerHTML = response.html;
+});

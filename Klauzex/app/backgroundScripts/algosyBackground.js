@@ -16,8 +16,11 @@ var trashExact = [
     "w/w",
     "treść",
     "ww.",
+    "ponadto",
+    "również",
     "ew.",
     "tzn.",
+    "jakiejkolwiek",
     ",",
     ":",
     "...",
@@ -28,6 +31,7 @@ function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 var useless = [
+    "(\\b" + escapeRegExp("§") + "[\\S]*)",
     "(\\b" + escapeRegExp("ustaw") + "[\\S]*)",
     "(\\b" + escapeRegExp("uchwał") + "[\\S]*)",
     "(\\b" + escapeRegExp("ust.") + "[\\S]*)",
@@ -99,8 +103,8 @@ var rozponawanieRegexow = [
             "(\\b" + escapeRegExp("podmiot") + "[\\S]*)",
             "(\\b" + escapeRegExp("wydawc") + "[\\S]*)",
             "(\\b" + escapeRegExp("dostawc") + "[\\S]*)",
-            "(\\b" + escapeRegExp("wysył") + "[\\S]*)",
-            "(\\b" + escapeRegExp("przewoz") + "[\\S]*)",
+            "(\\b" + escapeRegExp("wysyłając") + "[\\S]*)",
+            "(\\b" + escapeRegExp("przewoź") + "[\\S]*)",
             containsPrefix("z ograniczoną odpowiedzialnością"),
             "(\\\"(.*?)\\\")",
         ]
@@ -128,6 +132,7 @@ var rozponawanieRegexow = [
             containsPrefix("przywilej"),
             containsPrefix("przepis"),
             containsPrefix("zasad"),
+            containsPrefix("warunk"),
         ]
     },
     {
@@ -200,11 +205,14 @@ var rozponawanieRegexow = [
         ]
     },
     {
-        tag: "notResponsible",
+        tag: "notresponsible",
         regex: [
+            containsPrefix("odpowiedzialność nie ponosi"),
             containsPrefix("nie ponosi odp"),
+            containsPrefix("nie będzie ponosił odp"),
             containsPrefix("nie gwarant"),
             containsPrefix("nie ponosimy odp"),
+            containsPrefix("nie ponoszą odp"),
             containsPrefix("nie odpowiad"),
             containsPrefix("nie jest odpow"),
             containsPrefix("nie bierze odpow"),
@@ -222,6 +230,7 @@ var rozponawanieRegexow = [
             containsPrefix("spór"),
             containsPrefix("zwrac"),
             containsPrefix("zwrot"),
+            containsPrefix("zwróc"),
             containsPrefix("roszcz"),
         ]
     },
@@ -251,13 +260,22 @@ var rozponawanieRegexow = [
             containsPrefix("będą ważne od"),
             containsPrefix("obowiązuje od"),
             containsPrefix("obowiązują od"),
-            containsPrefix("wchodzą w życie od"),
+            containsPrefix("wchodzą w życie z chwilą"),
         ]
     },
     {
         tag: "warranty",
         regex: [
             containsPrefix("gwaran"),
+            containsPrefix("zagwaran"),
+        ]
+    },
+    {
+        tag: "if",
+        regex: [
+            containsPrefix("jeśli"),
+            containsPrefix("jeżeli"),
+            containsPrefix("o ile"),
         ]
     }
 ];
@@ -315,6 +333,7 @@ function sanitizeSingle(clause) {
     for (var i = 0; i < trashSuffix.length; i++) {
         clause = clause.replace(new RegExp("([\\S]+" + escapeRegExp(trashSuffix[i]) + ")", "ig"), "")
     }
+    clause = replaceDoubleSpaces(clause);
     for(var j = 0; j < rozponawanieRegexow.length; j++){
         danyTag = rozponawanieRegexow[j];
         var replacement = "#" + danyTag.tag + "#";
@@ -333,8 +352,11 @@ function sanitizeSingle(clause) {
         clause = clause.substring(0, clause.length - 1);
     }
     if (clause[0] == ' ') {
-        clause = clause.substring(1, clause.length - 1);
+        clause = clause.substring(1);
     }
+    clause = clause.split(' ').filter(function (item, pos, arr) {
+        return pos === 0 || item !== arr[pos - 1];
+    }).join(' ');
     return clause;
 }
 

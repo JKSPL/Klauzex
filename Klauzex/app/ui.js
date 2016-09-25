@@ -63,9 +63,8 @@ KlauzulexUI = (function() {
 
     function __getListItem(clauseInfo, idx) {
         $('body').mark(clauseInfo.clause, {
+            acrossElements: true,
             separateWordSearch: false,
-            acrossElements: false,
-            accuracy: "exactly",
             each: function(el) {
                 $(el).attr('id', ANCHOR_REF + '-' + idx);
                 var original = clauseInfo.original || {}, noData = "Brak danych";

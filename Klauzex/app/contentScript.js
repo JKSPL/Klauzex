@@ -26,7 +26,7 @@ function findScams()
                         id: scams[i].clause,
                         clause: scams[i].text,
                         original: dict[scams[i].clause - 1]
-                    })
+                    });
                 }
                 console.log(uiArray);
                 KlauzulexUI.showWarning(uiArray);

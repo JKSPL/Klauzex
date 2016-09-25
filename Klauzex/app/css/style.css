@@ -16,7 +16,7 @@ mark:hover {
 }
 
 .ns-box .ns-box-inner {
-    font-size: inherit !important;
+    font-size: 14px !important;
 }
 
 .ns-box p {
@@ -28,7 +28,7 @@ mark:hover {
 }
 
 .ns-box .white-list {
-    font-size: 0.9em !important;
+    font-size: 14px !important;
     float: right;
     cursor: pointer;
 }
@@ -36,3 +36,13 @@ mark:hover {
 #demo-container {
     padding-top: 4em;
 }
+
+.ui.list .item {
+    display: inline-block !important;
+}
+
+.ui.inverted.popup, .ui.inverted.popup:after, .ui.inverted.popup:before {
+    background: rgba(158, 58, 56, 0.901961) !important;
+    font-size: 14px;
+}
+

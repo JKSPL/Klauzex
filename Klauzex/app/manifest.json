@@ -9,8 +9,8 @@
     "content_scripts": [{
         "matches": ["<all_urls>"],
         "exclude_matches": ["*://*.google.com/*", "*://*.google.pl/*"],
-        "css": ["css/ns-default.css", "css/ns-style-bar.css", "css/style.css"],
-        "js": ["thirdParty/jquery-3.1.1.min.js", "storage.js", "thirdParty/mark.js", "thirdParty/modernizr.custom.js", "thirdParty/classie.js", "thirdParty/notificationFx.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
+        "css": ["css/semantic-popup.min.css", "css/ns-default.css", "css/ns-style-bar.css", "css/style.css"],
+        "js": ["thirdParty/jquery-3.1.1.min.js", "thirdParty/semantic-popup.min.js", "storage.js", "thirdParty/mark.js", "thirdParty/modernizr.custom.js", "thirdParty/classie.js", "thirdParty/notificationFx.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
         "permissions": ["storage"],
         "run_at": "document_end"
     }],

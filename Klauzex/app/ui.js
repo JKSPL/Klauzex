@@ -68,23 +68,35 @@ KlauzulexUI = (function() {
             accuracy: "exactly",
             each: function(el) {
                 $(el).attr('id', ANCHOR_REF + '-' + idx);
+                var original = clauseInfo.original || {}, noData = "Brak danych";
+                var popupHtml = "<div class='ui list'>" + 
+                                "    <div class='item'>" +
+                                "        <div class='header'>Oryginalna klauzula</div>" + (original.clause || noData) +
+                                "    </div>" + 
+                                "    <div class='item'>" +
+                                "        <div class='header'>Sygnatura akt</div>" + (original['doc_signature'] || noData) +
+                                "    </div>" + 
+                                "    <div class='item'>" +
+                                "        <div class='header'>Data wydania wyroku</div>" + (original['sentence_date'] || noData) +
+                                "    </div>" + 
+                                "    <div class='item'>" +
+                                "        <div class='header'>Sąd wydający wyrok</div>" + (original.court || noData) +
+                                "    </div>" + 
+                                "</div>";
+
+                $(el).popup({
+                    html: popupHtml,
+                    variation: 'large inverted',
+                    inline: true,
+                    lastResort: 'top center'
+                });
             },
             filter: function(text, term, allCount, count) {
                 // Only highlight first one
                 return count == 0;
             }
         });
-        // $('body').mark(clauseInfo.clause, {
-        //     separateWordSearch: true,
-        //     acrossElements: true,
-        //     each: function(el) {
-        //         $(el).attr('id', ANCHOR_REF + '-' + idx);
-        //     },
-        //     filter: function(text, term, allCount, count) {
-        //         // Only highlight first one
-        //         return count == 0;
-        //     }
-        // });
+       
         var anchor = "#" + ANCHOR_REF + '-' + idx;
         var clauseInfoUrl = 'http://decyzje.uokik.gov.pl/nd_wz_um.nsf/WWW-wszystkie?SearchView&Query=([FORM]%3DPostanowienie)%20AND%20([Nr_pos_T]%20%3D%20%22' + clauseInfo.id + '%22)';
         return "<br/><p><a class='clause' href='" + anchor + "'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "'>link do klauzuli</a>)</p>";

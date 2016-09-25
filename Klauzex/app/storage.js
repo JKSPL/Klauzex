@@ -4,7 +4,7 @@
 
 function addWhitelistedDomain(domain) {
     getWhitelistedDomains(function (domains) {
-        domains.push(domain)
+        domains.push(domain);
         chrome.storage.sync.set({ whitelistedDomains: domains });
-    })
+    });
 }

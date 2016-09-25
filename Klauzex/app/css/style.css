@@ -1,11 +1,11 @@
 mark {
-	background-color: red;
-	color: white;
-	padding: 3px;
-	font-weight: bold;
+	background-color: red !important;
+	color: white !important;
+	padding: 3px !important;
+	font-weight: bold !important;
 }
 
-.ns-box .clause a {
+.ns-box a {
     color: rgba(250, 251, 255, 0.952941) !important;
     font-size: inherit !important;
 }
@@ -16,4 +16,14 @@ mark {
 
 .ns-box p {
     line-height: 1.2 !important;
+}
+
+.ns-box .clause-info {
+    color: yellow !important;
+}
+
+.ns-box .white-list {
+    font-size: 0.9em !important;
+    float: right;
+    cursor: pointer;
 }

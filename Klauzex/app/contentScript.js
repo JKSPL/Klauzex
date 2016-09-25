@@ -54,7 +54,7 @@ function findScamsInLinks() {
                 });
             });
             iframe.appendTo('body');
-        })(i)
+        })(i);
     }
 }
 

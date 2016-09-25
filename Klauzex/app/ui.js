@@ -64,7 +64,8 @@ KlauzulexUI = (function() {
     function __getListItem(clauseInfo, idx) {
         $('body').mark(clauseInfo.clause, {
             separateWordSearch: false,
-            acrossElements: true,
+            acrossElements: false,
+            accuracy: "exactly",
             each: function(el) {
                 $(el).attr('id', ANCHOR_REF + '-' + idx);
             },
@@ -73,6 +74,17 @@ KlauzulexUI = (function() {
                 return count == 0;
             }
         });
+        // $('body').mark(clauseInfo.clause, {
+        //     separateWordSearch: true,
+        //     acrossElements: true,
+        //     each: function(el) {
+        //         $(el).attr('id', ANCHOR_REF + '-' + idx);
+        //     },
+        //     filter: function(text, term, allCount, count) {
+        //         // Only highlight first one
+        //         return count == 0;
+        //     }
+        // });
         var anchor = "#" + ANCHOR_REF + '-' + idx;
         var clauseInfoUrl = 'http://decyzje.uokik.gov.pl/nd_wz_um.nsf/WWW-wszystkie?SearchView&Query=([FORM]%3DPostanowienie)%20AND%20([Nr_pos_T]%20%3D%20%22' + clauseInfo.id + '%22)';
         return "<br/><p><a class='clause' href='" + anchor + "'>" + clauseInfo.clause + "</a> - (<a class='clause-info' href='" + clauseInfoUrl + "'>link do klauzuli</a>)</p>";

@@ -1,26 +1,54 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <script src="thirdParty/jquery-3.1.1.min.js"></script>
-    <script src="thirdParty/semantic.min.js"></script>
-    <script src="backgroundScripts/algosyBackground.js"></script>
-    <script src="demo.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
-    <title></title>
-</head>
-<body>
-    <div class="ui container">
-        <div class="ui inverted segment">
-            <h1 class="ui dividing header">Klauzulex demo</h1>
-            <div class="ui form">
-                <div class="field">
-                    <label>Tekst wejściowy</label>
-                    <input class="ui inverted input"  type="text" id="input_string" placeholder="Tekst wejściowy">
+    <head>
+        <script src="thirdParty/jquery-3.1.1.min.js">
+        </script>
+        <script src="thirdParty/semantic.min.js">
+        </script>
+        <script src="backgroundScripts/algosyBackground.js">
+        </script>
+        <script src="demo.js">
+        </script>
+        <link href="css/semantic.min.css" rel="stylesheet" type="text/css">
+            <link href="css/style.css" rel="stylesheet">
+                <title>
+                </title>
+            </link>
+        </link>
+    </head>
+    <body>
+        <div class="ui text container" id="demo-container">
+            <div class="ui raised padded segment">
+                <h1 class="ui dividing header">
+                    Klauzex demo
+                    <div class="sub header">
+                    Prosty skrypt demonstrujący działanie heurystyk unifikujących postanowienia regulaminów.
+                        
+                    </div>
+                </h1>
+                <p>
+                </p>
+                <div class="ui basic segment form">
+                    <div class="field">
+                        <label>
+                            Tekst wejściowy
+                        </label>
+                        <input class="ui input" id="input_string" placeholder="Wpisz tekst wejściowy..." type="text">
+                        </input>
+                    </div>
+                    <button class="ui button" id="process">
+                        Przetwórz
+                    </button>
                 </div>
-                <button class="ui button" id="process">Przetwórz</button>
+                <div class="ui secondary segment" style="min-height: 200px; font-size: 1.4em">
+                    <h3 class="ui dividing header">
+                        Wynik
+                    </h3>
+                    <p id="output">
+                        Wpisz tekst aby zobaczyć jego reprezentację po unifikacji...
+                    </p>
+                </div>
             </div>
-            <div id="output" style="width: 100%; height: 200px; font-size: 25pt; margin: 40px"></div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

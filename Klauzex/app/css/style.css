@@ -1,13 +1,18 @@
 mark {
-	background-color: red !important;
-	color: white !important;
-	padding: 3px !important;
-	font-weight: bold !important;
+    background-color: red !important;
+    color: white !important;
+    padding: 3px !important;
+    font-weight: bold !important;
+}
+
+mark:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3) !important;
 }
 
 .ns-box a {
     color: rgba(250, 251, 255, 0.952941) !important;
     font-size: inherit !important;
+    z-index: 2147483646 !important;
 }
 
 .ns-box .ns-box-inner {
@@ -26,4 +31,8 @@ mark {
     font-size: 0.9em !important;
     float: right;
     cursor: pointer;
+}
+
+#demo-container {
+    padding-top: 4em;
 }

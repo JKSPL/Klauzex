@@ -54,11 +54,28 @@ function findScamsInLinks() {
             }
             else
             {
-                iframe = $('<iframe src="' + href + '" style="display: none"></iframe>');
-                iframe.on('load', function () {
-                    findScamInLinked(this.contentWindow.document.body.innerText, href);
-                });
-                iframe.appendTo('body');
+                $.ajax(href,
+                    {
+                        headers:
+                            {
+                                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                            },
+                        xhr: function () {
+                            var xhr = jQuery.ajaxSettings.xhr();
+                            var setRequestHeader = xhr.setRequestHeader;
+                            xhr.setRequestHeader = function (name, value) {
+                                if (name == 'X-Requested-With') return;
+                                setRequestHeader.call(this, name, value);
+                            }
+                            return xhr;
+                        },
+
+                        success: function (data) {
+                            var cleaned = $(data).not('script').not('style');
+                            var div = jQuery('<div/>').html(cleaned);
+                            findScamInLinked(div.text(), href);
+                        }
+                    });
             }
         })(i);
     }

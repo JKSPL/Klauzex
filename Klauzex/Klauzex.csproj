@@ -42,6 +42,7 @@
     <Content Include="app\algosy.js" />
     <Content Include="app\backgroundScripts\algosyBackground.js" />
     <Content Include="app\contentScript.js" />
+    <Content Include="app\css\def.css" />
     <Content Include="app\css\ns-default.css" />
     <Content Include="app\css\ns-style-bar.css" />
     <Content Include="app\css\semantic-popup.min.css" />

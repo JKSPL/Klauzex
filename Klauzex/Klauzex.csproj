@@ -49,7 +49,6 @@
     <Content Include="app\css\semantic-popup.min.css" />
     <Content Include="app\css\semantic.min.css" />
     <Content Include="app\css\style.css" />
-    <Content Include="app\data\slowa.txt" />
     <Content Include="app\demo.js" />
     <Content Include="app\demoForm.html" />
     <Content Include="app\eventPage.js" />
@@ -89,7 +88,9 @@
   <ItemGroup>
     <Content Include="app\manifest.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="app\data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

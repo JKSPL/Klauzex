@@ -53,6 +53,9 @@
     <Content Include="app\demoForm.html" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
+    <Content Include="app\img\icon128.png" />
+    <Content Include="app\img\icon16.png" />
+    <Content Include="app\img\icon48.png" />
     <Content Include="app\img\new_icon.png" />
     <Content Include="app\img\shopGreen38.png" />
     <Content Include="app\img\shopGreen.png" />

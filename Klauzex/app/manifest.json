@@ -22,5 +22,6 @@
         "persistent": true,
         "permissions": ["storage", "alarms"]
     },
-    "permissions": ["storage", "alarms", "tabs"]
+    "permissions": ["storage", "alarms", "tabs"],
+	"web_accessible_resources": [ "thirdParty/pdf.worker.js" ]
 }

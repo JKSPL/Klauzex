@@ -1,5 +1,5 @@
 ﻿
-PDFJS.workerSrc = 'https://nopaste.me/view/raw/6f532bfc';
+PDFJS.workerSrc = chrome.extension.getURL('thirdParty/pdf.worker.js');
 
 chrome.runtime.sendMessage({ request: 'setIcon', domain: document.domain });
 

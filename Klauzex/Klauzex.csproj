@@ -47,6 +47,12 @@
     <Content Include="app\demoForm.html" />
     <Content Include="app\eventPage.js" />
     <Content Include="app\img\icon.png" />
+    <Content Include="app\img\new_icon.png" />
+    <Content Include="app\img\shopGreen.png" />
+    <Content Include="app\img\shopRed.png" />
+    <Content Include="app\img\shopWhite.png" />
+    <Content Include="app\img\shopYellow.png" />
+    <Content Include="app\img\Untitled-3.png" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
     <Content Include="app\sentences.js" />

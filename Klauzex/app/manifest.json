@@ -5,20 +5,22 @@
     "version": "1.0",
     "browser_action": {
         "default_popup": "popup.html",
-        "default_icon": "img/new_icon.png"
+        "default_icon": {
+			"38": "img/shopGreen38.png"
+		}
     },
     "content_scripts": [{
         "matches": ["<all_urls>"],
         "exclude_matches": ["*://*.google.com/*", "*://*.google.pl/*", "*://*.facebook.com/*"],
 		"css": ["css/semantic-popup.min.css", "css/ns-default.css", "css/ns-style-bar.css", "css/style.css"],
-        "js": ["thirdParty/jquery-3.1.1.min.js", "storage.js", "thirdParty/semantic-popup.min.js", "thirdParty/mark.js", "thirdParty/modernizr.custom.js", "thirdParty/classie.js", "thirdParty/notificationFx.js", "thirdParty/pdf.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
+        "js": ["thirdParty/jquery-3.1.1.min.js", "domains.js", "thirdParty/semantic-popup.min.js", "thirdParty/mark.js", "thirdParty/modernizr.custom.js", "thirdParty/classie.js", "thirdParty/notificationFx.js", "thirdParty/pdf.js", "algosy.js", "ui.js", "sentences.js", "contentScript.js", "clauseRepository.js"],
         "permissions": ["storage"],
         "run_at": "document_end"
     }],
     "background": {
-        "scripts": ["clauseRepository.js", "backgroundScripts/algosyBackground.js", "sentences.js", "eventPage.js"],
+        "scripts": ["domains.js", "clauseRepository.js", "backgroundScripts/algosyBackground.js", "sentences.js", "eventPage.js"],
         "persistent": true,
         "permissions": ["storage", "alarms"]
     },
-    "permissions": ["storage", "alarms"]
+    "permissions": ["storage", "alarms", "tabs"]
 }

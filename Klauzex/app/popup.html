@@ -1,52 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
   <meta charset="UTF-8">
 
-        <script src="thirdParty/jquery-3.1.1.min.js">
-        </script>
-        <script src="thirdParty/semantic.min.js">
-        </script>
-        <script src="backgroundScripts/algosyBackground.js">
-        </script>
-        <script src="demo.js">
-        </script>
+        <script src="thirdParty/jquery-3.1.1.min.js"></script>
+        <script src="thirdParty/semantic.min.js"></script>
+        <script src="backgroundScripts/algosyBackground.js"></script>
+        <script src="domains.js"></script>
+        <script src="popup.js"></script>
         <link href="css/semantic.min.css" rel="stylesheet" type="text/css">
-        </link>
         <link href="css/style.css" rel="stylesheet">
-        </link>
     </head>
     <body>
         <div class="ui text container" id="demo-container">
             <!-- <div class="ui raised padded segment"> -->
-                <h1 class="ui dividing header">
-                    Klauzex demo
-                    <div class="sub header">
-                    Prosty skrypt demonstrujący działanie heurystyk unifikujących postanowienia regulaminów.
-                        
-                    </div>
-                </h1>
-                <p>
-                </p>
-                <div class="ui form">
-                    <div class="field">
-                        <label>
-                            Tekst wejściowy
-                        </label>
-                        <!-- <input class="ui input" id="input_string" placeholder="Wpisz tekst wejściowy..." type="text">
-                        </input> -->
-                        <textarea class="ui input" id="input_string" placeholder="Wpisz tekst wejściowy..." type="text" rows=4 col=50></textarea>
-                    </div>
+                <div id="toggle_container">
+                    <a href="#" id="toggle"></a>
                 </div>
-                <div class="ui secondary segment" style="min-height: 200px; font-size: 1.1em; margin-bottom: 2em">
-                    <h3 class="ui dividing header">
-                        Wynik
-                    </h3>
-                    <p id="output">
-                        Wpisz tekst aby zobaczyć jego reprezentację po unifikacji...
-                    </p>
+                <div id="toggledomain_container">
+                    <a href="#" id="toggledomain"></a>
                 </div>
             </div>
+        <div id="stopValue" class="hidden">Zatrzymaj działanie</div>
+        <div id="startValue" class="hidden">Wznów działanie</div>
+        <div id="stopDomainValue" class="hidden">Zatrzymaj działanie w tej domenie</div>
+        <div id="startDomainValue" class="hidden">Wznów działanie w tej domenie</div>
         <!-- </div> -->
     </body>
 </html>

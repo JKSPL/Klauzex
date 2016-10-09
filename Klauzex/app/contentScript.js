@@ -1,10 +1,18 @@
 ﻿
 PDFJS.workerSrc = 'https://nopaste.me/view/raw/6f532bfc';
-getWhitelistedDomains(function (domains)
-{
-    if(domains.indexOf(document.domain) == -1)
-        findScams();
-})
+
+chrome.runtime.sendMessage({ request: 'setIcon', domain: document.domain });
+
+chrome.runtime.sendMessage({ request: 'getGlobalState' }, function (enabled) {
+    if (enabled) {
+        isWhitelisted(document.domain, function (whitelisted) {
+            console.log('whitelisted = ' + whitelisted);
+            if (!whitelisted) {
+                findScams();
+            }
+        });
+    }
+});
 
 function findScams()
 {
@@ -49,6 +57,7 @@ function findScamsInLinks() {
                 new Pdf2TextClass().pdfToText(href, function (s, t) { },
                 function(text)
                 {
+                    console.log(text);
                     findScamInLinked(text, href);
                 });
             }
@@ -125,7 +134,7 @@ function findLinksWithPolicies() {
     var policiesTerms = ["regulamin", "zasady", "warunki", "reguły"];
     $('a').each(function() {
         for (i = 0; i < policiesTerms.length; i++) {
-            if (this.innerHTML.toLowerCase().indexOf(policiesTerms[i]) != -1) {
+            if (this.innerHTML.toLowerCase().indexOf(policiesTerms[i]) != -1 || this.href.toLowerCase().indexOf(policiesTerms[i]) != -1) {
                 policiesLinks.push(this);
                 break;
             }

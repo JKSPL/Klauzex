@@ -47,3 +47,7 @@ mark:hover {
     z-index: 2147483646 !important;
 }
 
+.hidden
+{
+    display: none;
+}
